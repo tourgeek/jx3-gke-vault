@@ -10,6 +10,33 @@ data:
         tourgeek/jx3-gke-vault: true
     plank: {}
     pod_namespace: jx
+    postsubmits:
+      dcorleyusc/node-http:
+      - agent: tekton-pipeline
+        branches:
+        - master
+        - main
+        labels:
+          aadpodidbinding: tekton-bot
+        name: release
+        pipeline_run_spec:
+          pipelineRef:
+            name: jx-meta-pipeline
+          serviceAccountName: tekton-bot
+    presubmits:
+      dcorleyusc/node-http:
+      - agent: tekton-pipeline
+        always_run: true
+        context: pr-build
+        labels:
+          aadpodidbinding: tekton-bot
+        name: pr-build
+        pipeline_run_spec:
+          pipelineRef:
+            name: jx-meta-pipeline
+          serviceAccountName: tekton-bot
+        rerun_command: /test this
+        trigger: (?m)^/test( all| this),?(\s+|$)
     prowjob_namespace: jx
     push_gateway:
       serve_metrics: true
@@ -19,6 +46,7 @@ data:
         required-if-present-contexts: null
         skip-unknown-contexts: false
       merge_method:
+        dcorleyusc/node-http: merge
         tourgeek/jx3-gke-vault: merge
       queries:
       - labels:
@@ -31,6 +59,7 @@ data:
         - needs-rebase
         repos:
         - tourgeek/jx3-gke-vault
+        - dcorleyusc/node-http
       - labels:
         - updatebot
         missingLabels:
@@ -41,6 +70,7 @@ data:
         - needs-rebase
         repos:
         - tourgeek/jx3-gke-vault
+        - dcorleyusc/node-http
       target_url: http://lighthouse-jx.34.123.189.69.nip.io/merge/status
 kind: ConfigMap
 metadata:

@@ -1,0 +1,22 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: dcorleyusc
+    provider: github
+    repository: node-http
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: dcorleyusc-node-http
+  namespace: jx
+spec:
+  httpCloneURL: https://github.com/dcorleyusc/node-http.git
+  org: dcorleyusc
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: node-http
+  scheduler:
+    kind: ""
+    name: ""
+  url: https://github.com/dcorleyusc/node-http
