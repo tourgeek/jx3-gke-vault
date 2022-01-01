@@ -41,7 +41,7 @@ data:
         - needs-rebase
         repos:
         - tourgeek/jx3-gke-vault
-      target_url: http://lighthouse-jx./merge/status
+      target_url: http://lighthouse-jx.34.123.189.69.nip.io/merge/status
 kind: ConfigMap
 metadata:
   creationTimestamp: null
