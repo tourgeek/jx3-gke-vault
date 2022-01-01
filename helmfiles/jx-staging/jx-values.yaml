@@ -20,16 +20,24 @@ jxRequirements:
     enabled: false
     schedule: ""
   cluster:
+    chartRepository: http://jenkins-x-chartmuseum.jx.svc.cluster.local:8080
+    clusterName: tf-jx-divine-donkey
     devEnvApprovers:
     - todo
     environmentGitOwner: todo
     gitKind: github
     gitName: github
     gitServer: https://github.com
+    gke:
+      projectNumber: "44819728510"
+    project: don-cloud-test
     provider: gke
     registry: gcr.io
+    zone: us-central1-a
   environments:
   - key: dev
+    owner: tourgeek
+    repository: jx3-gke-vault
   - key: staging
   - key: production
   ingress:
@@ -39,17 +47,33 @@ jxRequirements:
     tls:
       email: ""
       enabled: false
-      production: false
+      production: true
+  kuberhealthy: true
+  pipelineUser:
+    username: dcorleyusc
   repository: nexus
   secretStorage: vault
-  vault: {}
+  storage:
+  - name: logs
+    url: gs://logs-tf-jx-divine-donkey-ee2defc2ee43
+  - name: reports
+    url: gs://reports-tf-jx-divine-donkey-ee2defc2ee43
+  - name: repository
+    url: gs://repository-tf-jx-divine-donkey-ee2defc2ee43
+  terraformVault: true
+  vault:
+    bucket: vault-tf-jx-divine-donkey-ee2defc2ee43
+    key: crypto-key-tf-jx-divine-donkey-ee2defc2ee43
+    keyring: keyring-tf-jx-divine-donkey-ee2defc2ee43
+    name: tf-jx-divine-donkey
+    serviceAccount: tf-jx-divine-donkey-vt
   webhook: lighthouse
 jxRequirementsIngressExternalDNS:
   enabled: false
 jxRequirementsIngressTLS:
   enabled: false
 jxRequirementsKuberhealthy:
-  enabled: false
+  enabled: true
 jxRequirementsTLSCheck:
   enabled: false
 jxRequirementsVault:
